@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <!--text view for heading-->
+    <TextView
+        android:id="@+id/idTVHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:gravity="center_horizontal"
+        android:padding="5dp"
+        android:text="Lorem Ipsum \n Dolor sit amet"
+        android:textAlignment="center"
+        android:textColor="@color/purple_700"
+        android:textSize="18sp" />
+
+    <!--edit text for user name-->
+    <EditText
+        android:id="@+id/idEdtUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idTVHeader"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Name"
+        android:inputType="text" />
+
+    <!--edit text for user email-->
+    <EditText
+        android:id="@+id/idEdtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idEdtUserName"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Email"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/idMotive"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idEdtEmail"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Reason"
+        android:inputType="textEmailAddress" />
+
+    <!--edit text for user password-->
+    <EditText
+        android:id="@+id/idEdtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/idMotive"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:hint="Password"
+        android:inputType="textPassword" />
+
+    <CheckBox
+        android:id="@+id/checkbox_meat"
+        android:layout_below="@id/idEdtPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="Lorem Ipsum"
+        android:onClick="onCheckboxClicked"/>
+
+    <!--button to register our new user-->
+    <Button
+        android:id="@+id/idBtnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/checkbox_meat"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="Lorem"
+        android:textAllCaps="false" />
+
+</RelativeLayout>
