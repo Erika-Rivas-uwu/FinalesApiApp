@@ -99,12 +99,11 @@ public class FourthFragment extends Fragment {
     }
 
     private void leerWs(){
-        System.out.println("------Aqui andamos otra vex");
         String nombre = name.getText().toString();
-        System.out.println("--------- "+nombre);
+        System.out.println("---PRUEBA--- Entidad: "+nombre);
 
         String uri = "https://api.weatherapi.com/v1/forecast.json?key=a1fc9e6c652b4edfaab143006222507&q="+nombre+"&days=5&aqi=no&alerts=no";
-        System.out.println("----- API: "+uri);
+        System.out.println("---PRUEBA--- API con entidad: "+uri);
         StringRequest getReq = new StringRequest(Request.Method.GET, uri, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -112,12 +111,12 @@ public class FourthFragment extends Fragment {
                 try {
                     JSONObject jsonObject = new JSONObject(response);
 
-                    //jsonObject.getString("location");
-                    System.out.println(jsonObject.getString("location"));
+
+                    //System.out.println(jsonObject.getString("location"));
                     Loc.setText("Location:"+jsonObject.getString("location"));
-                    System.out.println(jsonObject.getString("current"));
+                    //System.out.println(jsonObject.getString("current"));
                     Curr.setText("Current:"+jsonObject.getString("current"));
-                    System.out.println(jsonObject.getString("forecast"));
+                    //System.out.println(jsonObject.getString("forecast"));
                     Fore.setText("Forecast:"+jsonObject.getString("forecast"));
 
                 } catch (JSONException e) {
@@ -128,10 +127,12 @@ public class FourthFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("ERRRRRRRRRRRROR");
+                //System.out.println("ERRRRRRRRRRRROR");
                 Log.e("Error",error.getMessage());
             }
         });
+
+        //Consumir API Volley Method
         Volley.newRequestQueue(getActivity()).add(getReq);
 
     }

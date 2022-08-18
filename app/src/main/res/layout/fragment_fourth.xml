@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!--text view for heading-->
+    <!-- Mostrar texto -->
     <TextView
         android:id="@+id/idTVHeader"
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
         android:textColor="@color/purple_700"
         android:textSize="18sp" />
 
-    <!--edit text for user name-->
+    <!-- Usamos este para nombre de entidad -->
     <EditText
         android:id="@+id/idEdtUserName"
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
 
 
 
-    <!--button to register our new user-->
+    <!-- Consumir API -->
     <Button
         android:id="@+id/idBtnRegister"
         android:layout_width="match_parent"
@@ -47,7 +47,7 @@
         android:onClick="leerWs"
         android:textAllCaps="false" />
 
-
+    <!-- Location info -->
     <TextView
         android:id="@+id/idApiResponseLoc"
         android:layout_width="match_parent"
@@ -61,6 +61,7 @@
         android:textColor="@color/purple_700"
         android:textSize="14sp" />
 
+    <!-- Current Info-->
     <TextView
     android:id="@+id/idApiResponseCurr"
     android:layout_width="match_parent"
@@ -74,6 +75,7 @@
     android:textColor="@color/purple_700"
     android:textSize="13sp" />
 
+    <!-- Forecast info-->
     <TextView
         android:id="@+id/idApiResponseFore"
         android:layout_width="match_parent"
