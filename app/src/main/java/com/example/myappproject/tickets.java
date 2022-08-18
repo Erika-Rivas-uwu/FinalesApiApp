@@ -16,7 +16,7 @@ public class tickets extends AppCompatActivity {
         //getActionBar().setDisplayHomeAsUpEnabled(true);
     }
     public void onCheckboxClicked(View view) {
-        // Is the view now checked?
+        // Casilla marcada y desmarcada unu
         boolean checked = ((CheckBox) view).isChecked();
 
         if(checked){
