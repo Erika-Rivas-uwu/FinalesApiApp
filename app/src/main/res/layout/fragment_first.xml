@@ -7,9 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Add TextView to display the date -->
-
-    <!-- Add CalendarView to display the Calendar -->
+    <!-- Fecha y disponibilidad -->
     <TextView
         android:id="@+id/date_view"
         android:layout_width="wrap_content"
@@ -21,6 +19,7 @@
         android:textColor="@android:color/background_dark"
         android:textStyle="bold" />
 
+    <!-- Calendario -->
     <CalendarView
         android:id="@+id/calendarV"
         android:layout_width="wrap_content"

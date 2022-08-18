@@ -84,10 +84,7 @@ public class FirstFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        // By ID we can use each component
-        // which id is assign in xml file
-        // use findViewById() to get the
-        // CalendarView and TextView
+
         cx = (CalendarView) getView().findViewById(R.id.calendarV);
         System.out.println("------------------------im here");
         date_view = (TextView) getView().
