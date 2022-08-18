@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".AddCreditCard">
 
-    <!--on below line we are creating a pay view-->
+    <!--on below line we are creating a pay view no se usaaaa-->
     <com.fevziomurtekin.payview.Payview
         android:id="@+id/payview"
         android:layout_width="wrap_content"

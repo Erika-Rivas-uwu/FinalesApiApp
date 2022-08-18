@@ -22,7 +22,7 @@ public class AddCreditCard extends AppCompatActivity {
         payview.setPayOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // after clicking on pay we are displaying toast message as card added.
+                // No se usa----
                 Toast.makeText(AddCreditCard.this, "Card Added. ", Toast.LENGTH_SHORT).show();
             }
         });
