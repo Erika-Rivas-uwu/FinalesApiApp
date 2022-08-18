@@ -7,6 +7,9 @@
     android:layout_height="match_parent"
     tools:context=".AddCreditCard">
 
+    <!-- Esta hecho por el PayView dependencia -->
+
+    <!-- solo podemos modificar colores, tamaños de letra o de pantalla y mensajes de error -->
     <!--on below line we are creating a pay view-->
     <com.fevziomurtekin.payview.Payview
         android:id="@+id/payview"

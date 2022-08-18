@@ -78,7 +78,8 @@ public class ThirdFragment extends Fragment {
         payview.setPayOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // after clicking on pay we are displaying toast message as card added.
+                // Este es lo que agregamos...
+                // El funcionamiento esta bajo el repositorio
                 Toast.makeText(getActivity(), "You have paid something...", Toast.LENGTH_SHORT).show();
             }
         });
