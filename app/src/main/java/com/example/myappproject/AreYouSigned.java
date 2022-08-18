@@ -16,10 +16,12 @@ public class AreYouSigned extends AppCompatActivity {
     }
 
     public void displayToast(View view) {
+        //no funciona
         Toast.makeText(AreYouSigned.this,"Lorem Ipsum...",Toast.LENGTH_SHORT);
     }
 
     public void mainMenu(View view) {
+        //Inicia el Menu principal o lobby
         Intent next = new Intent(this,MainActivity.class);
         startActivity(next);
     }

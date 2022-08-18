@@ -34,6 +34,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/plane" />
 
+    <!--Guide line =  Regla-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
@@ -41,6 +42,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.500684" />
 
+    <!--Guide line =  Regla-->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
         android:layout_width="wrap_content"
