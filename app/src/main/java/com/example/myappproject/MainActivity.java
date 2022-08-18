@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView n = findViewById(R.id.bottomNavigationView);
         n.setOnNavigationItemSelectedListener(mThing);
 
-        loadFragment(hF);
+        loadFragment(hF);//este lo llamamos aqui para cargar el gatito
     }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mThing = new BottomNavigationView.OnNavigationItemSelectedListener() {
