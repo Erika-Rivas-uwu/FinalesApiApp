@@ -1,5 +1,6 @@
 package com.example.myappproject;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,7 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -23,8 +26,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,6 +46,7 @@ public class FourthFragment extends Fragment {
     EditText name;
     TextView Loc,Curr,Fore;
     Button btn;
+    ImageView todayImage,tomorrowImage,afterTomorrowImage;
 
 
     public FourthFragment() {
@@ -93,12 +95,81 @@ public class FourthFragment extends Fragment {
         Curr = getView().findViewById(R.id.idApiResponseCurr);
         Fore = getView().findViewById(R.id.idApiResponseFore);
 
+        todayImage = getView().findViewById(R.id.TodayImage);
+        tomorrowImage = getView().findViewById(R.id.TomorrowImage);
+        afterTomorrowImage = getView().findViewById(R.id.AfterTomorrowImage);
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 leerWs();
             }
         });
+
+        todayImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(android.view.View v) {
+                Toast.makeText(getActivity(),"Today's weather", Toast.LENGTH_SHORT).show();
+            }
+        });
+        tomorrowImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(android.view.View v) {
+                Toast.makeText(getActivity(),"Tomorrow's weather", Toast.LENGTH_SHORT).show();
+            }
+        });
+        afterTomorrowImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(android.view.View v) {
+                Toast.makeText(getActivity(),"after tomorrow's weather", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+    private void changeIcons(String todayText,String tomorrowText,String afterTomorrowText) {
+        String text = "";
+        for (int i=0;i<4;i++){
+            if(i==1) text = todayText;
+            else if(i==2) text = tomorrowText;
+            else text = afterTomorrowText;
+
+            changeIconsSwitch(text,i);
+
+        }
+    }
+
+    private void changeIconsSwitch(String text,int day) {
+        System.out.println("-----.-.-.-.- Changing to icon: "+text+" ; From day#"+day);
+
+        Drawable rs = null;
+        switch (text){
+            case "Sunny":
+                rs = getResources().getDrawable(R.drawable.sunny);
+                break;
+            case "Moderate rain":
+                rs = getResources().getDrawable(R.drawable.moderate_rain);
+                break;
+            case "Heavy rain":
+                rs = getResources().getDrawable(R.drawable.heavy_rain);
+                break;
+            case "Patchy rain possible":
+                rs = getResources().getDrawable(R.drawable.patchy_rain_possible);
+                break;
+            default:
+                rs = getResources().getDrawable(R.drawable.ic_baseline_cloud_24);
+        }
+
+        switch (day){
+            case 1:
+                todayImage.setImageDrawable(rs);
+                break;
+            case 2:
+                tomorrowImage.setImageDrawable(rs);
+                break;
+            case 3:
+                afterTomorrowImage.setImageDrawable(rs);
+                break;
+        }
     }
 
     private void leerWs(){
@@ -141,7 +212,7 @@ public class FourthFragment extends Fragment {
                     //----Location things
                     System.out.println("Location");
                     System.err.println(locInfo);
-                    Loc.setText("Location:"+locInfo.getString("name")+
+                    Loc.setText("--Location--\n"+locInfo.getString("name")+
                             ", ID:"+locInfo.getString("tz_id")+
                             ", Country: "+locInfo.getString("country")+
                             ", localTime: "+locInfo.getString("localtime"));
@@ -149,7 +220,7 @@ public class FourthFragment extends Fragment {
                     //--Current things
                     System.out.println("Current");
                     System.err.println(currInfo);
-                    Curr.setText("Current: C:"+currInfo.getString("temp_c")+
+                    Curr.setText("--Current--\n"+currInfo.getString("temp_c")+
                             ", Condition: "+currCondition.getString("text")+
                             ", wind k/h: "+currInfo.getString("wind_kph")+
                             ", Clouds: "+currInfo.getString("cloud")+
@@ -168,6 +239,7 @@ public class FourthFragment extends Fragment {
                             ", Max_Wind_k/h: "+infoToday.getString("maxwind_kph")+
                             ", Average Humidity: "+infoToday.getString("avghumidity")+
                             "-- Condition: "+conditionToday.getString("text");
+
                     //---
                     tomorrow = "Date: "+tomorrowDay.getString("date")+
                             ", Temp_Max_c: "+infoTomorrow.getString("maxtemp_c")+
@@ -183,6 +255,9 @@ public class FourthFragment extends Fragment {
                             ", Average Humidity: "+infoAfterTomorrow.getString("avghumidity")+
                             "-- Condition: "+conditionAfterTomorrow.getString("text");
 
+                    //Change icons----
+                    changeIcons(conditionToday.getString("text"),conditionTomorrow.getString("text"),conditionAfterTomorrow.getString("text"));
+
                     //Print each day
                     System.out.println("Forecast today");
                     System.out.println(today);
@@ -192,20 +267,20 @@ public class FourthFragment extends Fragment {
                     System.out.println(afterTomorrow);
 
                     //Set it to display----
-                    Fore.setText("Forecast[\n--Today:"+today+
-                            "\n--Tomorrow: "+tomorrow+
-                            "\n--After Tomorrow: "+afterTomorrow
-                            +"]");
+                    Fore.setText("--Forecast--\n-*-*-Today-*-*-\n"+today+
+                            "\n-*-*-Tomorrow-*-*-\n "+tomorrow+
+                            "\n-*-*-After Tomorrow-*-*-\n "+afterTomorrow);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
             }
+
+
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //System.out.println("ERRRRRRRRRRRROR");
                 Log.e("Error",error.getMessage());
             }
         });
