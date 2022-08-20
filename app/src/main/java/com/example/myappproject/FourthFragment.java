@@ -20,8 +20,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -109,15 +112,90 @@ public class FourthFragment extends Fragment {
             public void onResponse(String response) {
 
                 try {
+                    //FULL REPONSE
                     JSONObject jsonObject = new JSONObject(response);
+                    //Only Location things
+                    JSONObject locInfo = jsonObject.getJSONObject("location");
+                    //Current and Current/condition
+                    JSONObject currInfo = jsonObject.getJSONObject("current");
+                    JSONObject currCondition = currInfo.getJSONObject("condition");
 
+                    //----- Forecast
+                    JSONObject foreInfo = jsonObject.getJSONObject("forecast");
+                    //Forecast/forecastDayArray[Hoy:{jsonHoy},mañana:{jsonMañana},pasado:{jsonPasado}]
+                    JSONArray forecastDay =  foreInfo.getJSONArray("forecastday"); //Lista de 3 días. Hoy, mañana y pasado
 
-                    //System.out.println(jsonObject.getString("location"));
-                    Loc.setText("Location:"+jsonObject.getString("location"));
-                    //System.out.println(jsonObject.getString("current"));
-                    Curr.setText("Current:"+jsonObject.getString("current"));
-                    //System.out.println(jsonObject.getString("forecast"));
-                    Fore.setText("Forecast:"+jsonObject.getString("forecast"));
+                    //Hoy: info and condition
+                    JSONObject todayDay = forecastDay.getJSONObject(0);
+                    JSONObject infoToday = todayDay.getJSONObject("day");
+                    JSONObject conditionToday = infoToday.getJSONObject("condition");
+                    //tomorrow: info and condition
+                    JSONObject tomorrowDay = forecastDay.getJSONObject(1);
+                    JSONObject infoTomorrow = tomorrowDay.getJSONObject("day");
+                    JSONObject conditionTomorrow = infoTomorrow.getJSONObject("condition");
+                    //afterTomorrow: info and condition
+                    JSONObject afterTomorrowDay = forecastDay.getJSONObject(2);
+                    JSONObject infoAfterTomorrow = afterTomorrowDay.getJSONObject("day");
+                    JSONObject conditionAfterTomorrow = infoAfterTomorrow.getJSONObject("condition");
+
+                    //----Location things
+                    System.out.println("Location");
+                    System.err.println(locInfo);
+                    Loc.setText("Location:"+locInfo.getString("name")+
+                            ", ID:"+locInfo.getString("tz_id")+
+                            ", Country: "+locInfo.getString("country")+
+                            ", localTime: "+locInfo.getString("localtime"));
+
+                    //--Current things
+                    System.out.println("Current");
+                    System.err.println(currInfo);
+                    Curr.setText("Current: C:"+currInfo.getString("temp_c")+
+                            ", Condition: "+currCondition.getString("text")+
+                            ", wind k/h: "+currInfo.getString("wind_kph")+
+                            ", Clouds: "+currInfo.getString("cloud")+
+                            ", Humidity: "+currInfo.getString("humidity")+"%");
+
+                    //--Forecast things
+                    System.out.println("Forecast");
+                    System.err.println(foreInfo);
+                    //Variable para los tres dias del forecast...
+                    String today,tomorrow,afterTomorrow;
+
+                    //Armado de dias
+                    today = "Date: "+todayDay.getString("date")+
+                            ", Temp_Max_c: "+infoToday.getString("maxtemp_c")+
+                            ", Temp_Min_c: "+infoToday.getString("mintemp_c")+
+                            ", Max_Wind_k/h: "+infoToday.getString("maxwind_kph")+
+                            ", Average Humidity: "+infoToday.getString("avghumidity")+
+                            "-- Condition: "+conditionToday.getString("text");
+                    //---
+                    tomorrow = "Date: "+tomorrowDay.getString("date")+
+                            ", Temp_Max_c: "+infoTomorrow.getString("maxtemp_c")+
+                            ", Temp_Min_c: "+infoTomorrow.getString("mintemp_c")+
+                            ", Max_Wind_k/h: "+infoTomorrow.getString("maxwind_kph")+
+                            ", Average Humidity: "+infoTomorrow.getString("avghumidity")+
+                            "-- Condition: "+conditionTomorrow.getString("text");
+                    //---
+                    afterTomorrow = "Date: "+afterTomorrowDay.getString("date")+
+                            ", Temp_Max_c: "+infoAfterTomorrow.getString("maxtemp_c")+
+                            ", Temp_Min_c: "+infoAfterTomorrow.getString("mintemp_c")+
+                            ", Max_Wind_k/h: "+infoAfterTomorrow.getString("maxwind_kph")+
+                            ", Average Humidity: "+infoAfterTomorrow.getString("avghumidity")+
+                            "-- Condition: "+conditionAfterTomorrow.getString("text");
+
+                    //Print each day
+                    System.out.println("Forecast today");
+                    System.out.println(today);
+                    System.out.println("Forecast tomorrow");
+                    System.out.println(tomorrow);
+                    System.out.println("Forecast after tomorrow");
+                    System.out.println(afterTomorrow);
+
+                    //Set it to display----
+                    Fore.setText("Forecast[\n--Today:"+today+
+                            "\n--Tomorrow: "+tomorrow+
+                            "\n--After Tomorrow: "+afterTomorrow
+                            +"]");
 
                 } catch (JSONException e) {
                     e.printStackTrace();
